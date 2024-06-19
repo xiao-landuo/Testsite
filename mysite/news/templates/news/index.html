@@ -1,24 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css"
+      integrity="sha384-PJsj/BTMqILvmcej7ulplguok8ag4xFTPryRq8xevL7eBYSmpXKcbNVuy+P0RMgq"
+      crossorigin="anonymous"
+    />
+
     <title>{{ title }}</title>
-</head>
-<body>
-  
-<h1>{{ title }}</h1>    
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Navbar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-{% for item in  news %}
-    <div>
-        <p>{{ item.title }}</p>
-        <p>{{ item.content }}</p>
-        <p>{{ item.created_at|date:"Y-m-d H:i"}}</p>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">Добавить новость</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-3">
+      <h1>{{title}}</h1>
+      <div class="row">
+        <div class="col-md-12">
+          {% for item in news%}
+          <div class="card mb-3">
+            <div class="card-header">Категория: {{item.category}}</div>
+            <div class="row g-0">
+              <div class="col-md-4">
+                {% if item.photo %}
+                <img src="{{item.photo.url}}" alt="" width="350" height="100%" class="mr-3" />
+                {% else %}
+                <img
+                  src="https://s2.best-wallpaper.net/wallpaper/1920x1200/1602/Blue-leaf-water-drops_1920x1200.jpg"
+                  alt=""
+                  width="350"
+                  class="mr-3"
+                />
+                {% endif %}
+              </div>
+
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{item.title}}</h5>
+                  <p class="card-text">{{item.content|safe|linebreaks|truncatewords:50}}</p>
+                  <a href="#" class="btn btn-primary">Read more...</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer text-body-secondary">
+              {{item.created_at|timesince}}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
-    <hr>
-{% endfor %}
 
+    <!-- Дополнительный JavaScript; выберите один из двух! -->
+    <!-- Вариант 1: пакет Bootstrap с Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
 
-
-</body>
+    <!-- Вариант 2: отдельные JS для Popper и Bootstrap -->
+    <!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+-->
+  </body>
 </html>

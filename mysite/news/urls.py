@@ -18,6 +18,7 @@ https://docs.djangoproject.com/en/5.0/topics/http/urls/
 from django.urls import path
 from .views import *
 
+
 urlpatterns = [
     path('', index),
 ]
