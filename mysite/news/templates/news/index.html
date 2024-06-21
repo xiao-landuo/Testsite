@@ -13,7 +13,7 @@
 {% block content %}
 
   {% for item in news%}
-  <div class="card mb-3" style="max-width: 850px;">
+  <div class="card mb-3" style="max-width: 880px;">
     <div class="card-header">
       Категория:
       <a href="{{item.category.get_absolute_url}}">{{item.category}}</a>
@@ -26,7 +26,7 @@
           alt=""
           width="350"
           class="img-fluid rounded"
-          hspace="10" vspace="20"
+          hspace="15" vspace="15"
         />
         {% else %}
         <img
@@ -34,7 +34,7 @@
           alt=""
           width="350"
           class="img-fluid rounded"
-          hspace="10" vspace="20"
+          hspace="15" vspace="15"
         />
         {% endif %}
       </div>

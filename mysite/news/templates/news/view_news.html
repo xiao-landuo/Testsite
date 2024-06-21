@@ -13,7 +13,7 @@
 {% block content %}
 
 
-  <div class="card mb-3">
+  <div class="card mb-3" style="max-width: 880px;">
     <div class="card-header">
       Категория:
       <a href="{{news_item.category.get_absolute_url}}">{{news_item.category}}</a>
@@ -25,14 +25,16 @@
           src="{{news_item.photo.url}}"
           alt=""
           width="350"
-          class="mr-3"
+          class="img-fluid rounded"
+          hspace="15" vspace="15"
         />
         {% else %}
         <img
           src="https://s2.best-wallpaper.net/wallpaper/1920x1200/1602/Blue-leaf-water-drops_1920x1200.jpg"
           alt=""
           width="350"
-          class="mr-3"
+          class="img-fluid rounded"
+          hspace="15" vspace="15"
         />
         {% endif %}
       </div>
