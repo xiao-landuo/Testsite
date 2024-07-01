@@ -14,7 +14,7 @@
 
 <h1>Регистрация</h1>
 
-<form method="post">
+<form action="{% url 'register' %}" method="post">
     {% csrf_token %}
     {{form.as_p}}
 
@@ -22,6 +22,5 @@
         <button type="submit" class="btn btn-primary btn-block">Регистрация</button>
     </div>
 </form>
-
 
 {% endblock content %}
