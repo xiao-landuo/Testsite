@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
-from django.conf.global_settings import MEDIA_URL
+from django.conf.global_settings import EMAIL_HOST, EMAIL_HOST_PASSWORD, EMAIL_HOST_USER, EMAIL_PORT, EMAIL_USE_SSL, EMAIL_USE_TLS, MEDIA_URL
 
 import os
 
@@ -142,3 +142,11 @@ MEDIA_URL = '/media/'
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'katerina.laban@mail.ru'
+EMAIL_HOST_PASSWORD = 'GBAKe3UHxnzivY8Tqg39'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
