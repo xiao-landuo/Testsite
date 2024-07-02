@@ -4,3 +4,5 @@ db.sqlite3
 .vscode
 readme
 media
+django_cache
+static
