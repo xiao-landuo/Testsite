@@ -29,6 +29,7 @@ SECRET_KEY = 'django-insecure-((5ob9@!w1i^5wr#)0p+loz1++=&(9os2e!34*antn=5tc^r=s
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DEBUG_TOOLBAR = False
 
 ALLOWED_HOSTS = []
 
@@ -42,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'ckeditor',
     'ckeditor_uploader',
     'captcha',
@@ -57,7 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -156,6 +157,15 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
 
+# Celery and redis
+REDIS_HOST = 'localhost'
+REDIS_PORT = '6370'
+BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}/0'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = BROKER_URL
+CELERY_DEFAULT_QUEUE = 'my_queue'
+
+
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CKEDITOR_CONFIGS = {
@@ -234,3 +244,13 @@ CACHES = {
         "LOCATION": os.path.join(BASE_DIR, 'django_cache'),
     }
 }
+
+
+if DEBUG and DEBUG_TOOLBAR:
+    INTERNAL_IPS = ['*', ]
+    INSTALLED_APPS += ['debug_toolbar']
+    MIDDLEWARE += 'debug_toolbar.middleware.DebugToolbarMiddleware',
+    DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda request: True}
+    
+        
+# from mysite.private_settings import *

@@ -9,6 +9,8 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from django.core.mail import send_mail
 
+from .tasks import new_user_task
+
 
 from .models import News, Category
 from .forms import NewsForm, UserRegisterForm, UserLoginForm, ContactForm
@@ -23,6 +25,7 @@ def register(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Вы успешно зарегистрироваись")
+            new_user_task.delay(user)
             return redirect('home')
         else:
             messages.error(request, 'Ошибка регистрации')
