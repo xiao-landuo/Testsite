@@ -76,13 +76,13 @@ class HomeNews(MyMixin, ListView):
     model = News
     template_name = 'news/home_news_list.html'
     context_object_name = 'news'
-    mixin_prop = 'Hellow world'
+    # mixin_prop = 'Hellow world'
     paginate_by = 2
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.get_upper('Главная страница')
-        context['mixin_prop'] = self.get_prop()
+        # context['mixin_prop'] = self.get_prop()
         return context
     
     def get_queryset(self):
